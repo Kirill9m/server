@@ -1,6 +1,12 @@
+import { https } from "http";
 import express from "express";
 import fs from "fs/promises";
+import path from "path";
 
+const options = {
+    key: fs.readFileSync('/etc/letsencrypt/live/projectki.se/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/projectki.se/fullchain.pem')
+  };
 const app = express();
 
 app.get('/', async (request, response) => {
@@ -21,7 +27,10 @@ app.get('/:name', async (request, response) => {
     response.send(changedHtml);
 });
 
-app.listen(3080);
+https.createServer(options, app).listen(443, () => {
+    console.log('HTTPS Server running on https://your-domain.com:443');
+  });
+  
 // app.get('/*', async (request, response) => {
 //   try {
 //     const path = request.path;
