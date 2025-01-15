@@ -1,4 +1,4 @@
-import { https } from "http";
+import https from 'https';
 import express from "express";
 import fs from "fs/promises";
 import path from "path";
@@ -30,7 +30,7 @@ app.get('/:name', async (request, response) => {
 https.createServer(options, app).listen(443, () => {
     console.log('HTTPS Server running on https://your-domain.com:443');
   });
-  
+
 // app.get('/*', async (request, response) => {
 //   try {
 //     const path = request.path;
