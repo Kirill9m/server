@@ -4,9 +4,10 @@ import fs from "fs/promises";
 import path from "path";
 
 const options = {
-    key: fs.readFileSync('/etc/letsencrypt/live/projectki.se/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/projectki.se/fullchain.pem')
+    key: fs.readFileSync(path.join(__dirname, 'ssl', 'privkey.pem')),
+    cert: fs.readFileSync(path.join(__dirname, 'ssl', 'fullchain.pem'))
   };
+  
 const app = express();
 
 app.get('/', async (request, response) => {
